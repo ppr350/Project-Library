@@ -19,6 +19,21 @@ function Book(title, author, pages, readIt) {
 
 const pythonCrashCourse = new Book("Pyhton Crash Course", "Eric Matthes", "552", true)
 
-// function addBookToShelf() {
+function addBookToShelf() {
 
-// }
+}
+
+const changeStatus = {
+	flipReadUnRead: function () {
+		console.log("Read it or not")
+		if (this.readIt === true) {
+			readIt === false;
+		} else if (this.readIt === false) {
+			readIt === true;
+		}
+		console.log(readIt);
+
+	}
+}
+
+const read = changeStatus.flipReadUnRead();
