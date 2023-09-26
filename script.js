@@ -25,37 +25,37 @@ const motherfocloir = new Book("MotherFocloir", "Darach O Seaghdha", "222", true
 
 const thinkLikeAProgrammer = new Book("Think Like A Programmer", "V. Anton Spraul", true);
 
-const IrishMythsAndLegends = new Book("Irish Myths And Legend", "Lady Gregory", "456", false);
+const irishMythsAndLegends = new Book("Irish Myths And Legend", "Lady Gregory", "456", false);
 
-function addBookToShelf() {
+// function addBookToShelf() {
 
-}
+// }
 
-const changeStatus = {
-	flipReadUnRead: function () {
+const changeReadingStatus = {
+	byFlipReadAndUnRead: function() {
+		console.log(this);
 		console.log("Read it or not")
-		console.log(this.readIt)
-		if (this.readIt === true) {
-			this.readIt === false;
-			console.log(this.description);
-		} else if (this.readIt === false) {
-			this.readIt === true;
-			console.log(this.description);
-		}
-		console.log(`${this.description}`);
+		console.log(`Now it is ${this.readIt}`)
+		this.readIt = !this.readIt;
+		console.log(`Switched to ${this.readIt}`);
+		
 
 	}
 }
 
-const read = changeStatus.flipReadUnRead(pythonCrashCourse);
+const read = changeReadingStatus.byFlipReadAndUnRead(motherfocloir);
+
 
 // let bookDisplay = document.getElementById("book-display")
 
+// Create a function to loop through bookshelf's array contents (book title) and put them on the screen
 function stackTheBookDisplay() {
-	// let bookDisplay = document.getElementById("book-display")
-	for (i = 0; i < bookShelf; i++) {
-		document.getElementById("book-display").innerText = array[i];
-	} 
+	for (i = 0; i < bookShelf.length; i++) {
+		const para = document.createElement("p");
+		para.innerText = bookShelf[i];
+		const element = document.getElementById("book-display");
+		element.appendChild(para);
+	};
 }
 
 stackTheBookDisplay()
