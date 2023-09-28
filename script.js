@@ -26,8 +26,8 @@ Book.prototype.changeReadingStatus = function() {
 	const bookTitleRegExed = this.title.replace(/\s/g, "");
 	console.log(bookTitleRegExed);
 	const thisBook = document.getElementById(bookTitleRegExed);
-	const changeDataSet = thisBook.dataset['data-status'];
-	console.log(changeDataSet)
+	const changeDataSet = thisBook.dataset.status;
+	console.log(thisBook)
 	// const getDataStatus = bookTitleRegExed.getAttribute('data-status');
 	// getDataStatus = this.dataset === true ? "NO" : "YES";
 	// bookTitleRegExed.dataset.status = this.readIt === true ? "YES" : "NO";
