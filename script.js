@@ -1,5 +1,4 @@
-// Added an empty array to store only BOOK TITLES //
-const bookObi = [];
+const bookDisplay = document.getElementById("book-display");
 
 // Constructor invocation to add NEW BOOKS w//
 function Book(title, author, pages, readIt) {
@@ -15,7 +14,6 @@ function Book(title, author, pages, readIt) {
 			console.log('I haven\'t read it yet.')
 		}
 	}
-	const addBookToShelf = bookObi.push(this.title);
 	return;
 }
 
@@ -24,10 +22,56 @@ Book.prototype.changeReadingStatus = function() {
 	console.log(`Did I read ${this.title}? It is ${this.readIt}.`);
 	this.readIt = !this.readIt;
 	console.log(`Now it is ${this.readIt}.`);
+	console.log(this.title);
+	const bookTitleRegExed = this.title.replace(/\s/g, "");
+	console.log(bookTitleRegExed);
+	const thisBook = document.getElementById(bookTitleRegExed);
+	const changeDataSet = thisBook.dataset['data-status'];
+	console.log(changeDataSet)
+	// const getDataStatus = bookTitleRegExed.getAttribute('data-status');
+	// getDataStatus = this.dataset === true ? "NO" : "YES";
+	// bookTitleRegExed.dataset.status = this.readIt === true ? "YES" : "NO";
+
+}
+
+Book.prototype.stackTheBookDisplay = function() {
+
+	// Create a div for THIS BOOK and be adopted by bookDisplay //
+	const thisBook = document.createElement('div');
+	thisBook.setAttribute("id", this.title.replace(/\s/g, ""));
+	bookDisplay.appendChild(thisBook);
+
+	// Add BOOK TITLE to page //
+	const bookTitle = document.createElement('p');
+	bookTitle.classList.add('book-title');
+	bookTitle.dataset.title = this.title;
+	bookTitle.innerText = this.title;
+	thisBook.appendChild(bookTitle);
+
+	// Add BOOK AUTHOR to page //
+	const bookAuthor = document.createElement('p');
+	bookAuthor.classList.add('book-author');
+	bookAuthor.dataset.author = this.author;
+	bookAuthor.innerText = this.author;
+	thisBook.appendChild(bookAuthor);
+
+	// Add BOOK PAGES to page //
+	const bookPages = document.createElement('p');
+	bookPages.classList.add('book-pages');
+	bookPages.dataset.pages = this.pages;
+	bookPages.innerText = this.pages;
+	thisBook.appendChild(bookPages);
+
+	// Add BOOK READING STATUS to page //
+	const bookReadingStatus = document.createElement('p');
+	bookReadingStatus.classList.add('book-status');
+	bookReadingStatus.innerText = this.readIt === true ? "YES" : "NO";
+	bookReadingStatus.dataset.status = this.readIt === true ? "YES" : "NO";
+	thisBook.appendChild(bookReadingStatus);
 }
 
 // Constructor invocation with "new" keyword to add BOOKS to the Book function above //
-const pythonCrashCourse = new Book("Pyhton Crash Course", "Eric Matthes", "552", true);
+const pythonCrashCourse = new Book("Python Crash Course", "Eric Matthes", "552", true);
 
 const motherfocloir = new Book("MotherFocloir", "Darach O Seaghdha", "222", true);
 
@@ -36,30 +80,6 @@ const thinkLikeAProgrammer = new Book("Think Like A Programmer", "V. Anton Sprau
 const irishMythsAndLegends = new Book("Irish Myths And Legend", "Lady Gregory", "456", false);
 
 // Test call //
-motherfocloir.changeReadingStatus();
+pythonCrashCourse.stackTheBookDisplay();
+pythonCrashCourse.changeReadingStatus();
 
-
-// Function invocation to loop through BOOKSHELF array and put them on the screen //
-// Find book info and add them to the display too
-const bookDisplay = document.getElementById("book-display");
-function stackTheBookDisplay() {
-	for (i = 0; i < bookObi.length; i++) {
-		const bookTitle = document.createElement("p");
-		bookTitle.classList.add("book-title");
-		bookTitle.innerText = bookObi[i];
-		bookDisplay.appendChild(bookTitle);
-
-		const bookAuthor = document.createElement('p');
-		bookAuthor.classList.add("book-author");
-		bookAuthor.innerHTML = function addAuthor() {
-			for (i = 0; i < bookObi.length; i++) {
-				if (bookObi[i] = this.bookTitle) {
-					console.log("found this")
-				}
-			}
-		}
-		bookDisplay.appendChild(bookAuthor);
-	};
-}
-
-stackTheBookDisplay()
