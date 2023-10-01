@@ -22,12 +22,21 @@ Book.prototype.changeReadingStatus = function() {
 	console.log(`Did I read ${this.title}? It is ${this.readIt}.`);
 	this.readIt = !this.readIt;
 	console.log(`Now it is ${this.readIt}.`);
-	console.log(this.title);
+	console.log(`The name of the book is "${this.title}".`);
 	const bookTitleRegExed = this.title.replace(/\s/g, "");
-	console.log(bookTitleRegExed);
+	console.log(`The id of this book is "${bookTitleRegExed}".`);
+	String(bookTitleRegExed);
 	const thisBook = document.getElementById(bookTitleRegExed);
-	const changeDataSet = thisBook.dataset.status;
-	console.log(thisBook)
+	const thisBookStatus = thisBook.getElementsByClassName('book-status')[0];
+	console.log(thisBookStatus)
+
+	// thisBookStatus.dataset.status = "NO"
+	console.log(typeof(bookTitleRegExed));
+	console.log(bookTitleRegExed);
+	console.log(thisBook.dataset);
+	console.log(thisBook);
+	console.log(thisBookStatus.getAttribute('data-status'));
+	console.log(thisBookStatus.setAttribute('data-status', 'NO'));
 	// const getDataStatus = bookTitleRegExed.getAttribute('data-status');
 	// getDataStatus = this.dataset === true ? "NO" : "YES";
 	// bookTitleRegExed.dataset.status = this.readIt === true ? "YES" : "NO";
