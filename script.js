@@ -82,3 +82,21 @@ const irishMythsAndLegends = new Book("Irish Myths And Legend", "Lady Gregory", 
 pythonCrashCourse.stackTheBookDisplay();
 // pythonCrashCourse.changeReadingStatus();
 
+// const addBookDialog = document.querySelector('#add-book-dialog');
+
+const dialog = document.querySelector('#add-book-dialog')
+const showDialog = document.querySelector('#show-dialog-button[data-dialog="show"]');
+const addBookThenCloseDialog = document.querySelector('#add-now-button');
+const cancelThenCloseDialog = document.querySelector('#cancel-button');
+
+showDialog.addEventListener('click', () => {
+	dialog.showModal();
+})
+
+addBookThenCloseDialog.addEventListener('click', () => {
+	dialog.close();
+})
+
+cancelThenCloseDialog.addEventListener('click', () => {
+	dialog.close();
+})

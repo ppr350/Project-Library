@@ -1,0 +1,36 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000001;
+}
+
+button {
+    cursor: pointer;
+}
+
+#add-book-dialog {
+    padding: 1em;
+    max-width: 5och;
+    border: 0;
+    box-shadow: 0 0 1em rgb(0 0 0 / .3);
+    /* the following 3 lines make the modal dialog centered */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 200ms ease-in-out;
+    & > * {
+        margin: 0 0 0.5rem 0;
+    }
+}
+
+#add-book-dialog::backdrop {
+    background: linear-gradient(45deg, red, blue);
+    opacity: .4;
+}

@@ -11,6 +11,80 @@
     
     <div id="book-display">
 
+        <!-- add book button -->
+        <div id="open-dialog">
+            <button
+                id="show-dialog-button"
+                data-dialog="show"
+                class="button"
+                type="submit">+ ADD BOOK</button>
+        </div>
+
+        <dialog id="add-book-dialog">
+            <form action="" method="dialog" name="add-book">
+                <fieldset>
+                    <p>WHAT BOOK WOULD YOU LIKE TO ADD?</p>
+                    <p class="input-title-section">
+                        <label for="input-title">TITLE:</label>
+                        <input 
+                            type="text"
+                            id="input-title"
+                            data-input="title"
+                            name="input-title"
+                            placeholder="BOOK TITLE"
+                            minlength="1"
+                            maxlength="40">
+                    </p>
+                    <p class="input-author-section">
+                        <label for="input-author">AUTHOR:</label>
+                        <input 
+                            type="text"
+                            id="input-author"
+                            data-input="author"
+                            name="input-author"
+                            placeholder="AUTHOR"
+                            minlength="1"
+                            maxlength="20">
+                    </p>
+                    <p class="input-pages-section">
+                        <label for="input-pages">TOTAL PAGES:</label>
+                        <input 
+                            type="number"
+                            id="input-pages"
+                            data-input="pages"
+                            name="input-pages"
+                            placeholder="TOTAL PAGES"
+                            minlength="1"
+                            maxlength="5000">
+                    </p>
+                    <p class="input-read-it-section">
+                        <label for="input-read-it">HAVE YOU READ IT?</label>
+                        <input
+                            type="checkbox"
+                            id="input-read-it"
+                            data-checkbox-input="read-it"
+                            name="input-read-it"
+                            value="YES">
+                    </p>
+                </fieldset>
+
+                <div id="close-dialog">
+                    <button
+                        class="button"
+                        id="add-now-button"
+                        data-input="add"
+                        type="submit">ADD</button>
+
+                    <button
+                        class="button"
+                        id="cancel-button"
+                        data-input="cancel"
+                        type="submit">CANCEL</button>
+                </div>
+
+            </form>
+        </dialog>
+
     </div>
 
 </body>
