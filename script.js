@@ -33,6 +33,7 @@ Book.prototype.changeReadingStatus = function() {
 	}
 }
 
+// Constructor invocation to display the book on the page //
 Book.prototype.stackTheBookDisplay = function() {
 
 	// Create a div for THIS BOOK and be adopted by bookDisplay //
@@ -79,13 +80,16 @@ const thinkLikeAProgrammer = new Book("Think Like A Programmer", "V. Anton Sprau
 const irishMythsAndLegends = new Book("Irish Myths And Legend", "Lady Gregory", "456", false);
 
 // Test call //
-pythonCrashCourse.stackTheBookDisplay();
+// pythonCrashCourse.stackTheBookDisplay();
 // pythonCrashCourse.changeReadingStatus();
 
-// const addBookDialog = document.querySelector('#add-book-dialog');
-
+const form = document.querySelector('form');
 const dialog = document.querySelector('#add-book-dialog')
-const showDialog = document.querySelector('#show-dialog-button[data-dialog="show"]');
+const showDialog = document.querySelector('#show-dialog-button');
+const inputedTitle = document.querySelector('#input-title');
+const inputedAuthor = document.querySelector('#input-author');
+const inputedPages = document.querySelector('#input-pages');
+const inputedReadIt = document.querySelector('#input-read-it')
 const addBookThenCloseDialog = document.querySelector('#add-now-button');
 const cancelThenCloseDialog = document.querySelector('#cancel-button');
 
@@ -93,10 +97,34 @@ showDialog.addEventListener('click', () => {
 	dialog.showModal();
 })
 
-addBookThenCloseDialog.addEventListener('click', () => {
-	dialog.close();
+inputedTitle.addEventListener('change', (e) => {
+	addBookThenCloseDialog.value += inputedTitle.value;
+});
+
+inputedAuthor.addEventListener('change', (e) => {
+	addBookThenCloseDialog.value += inputedAuthor.value;
 })
 
-cancelThenCloseDialog.addEventListener('click', () => {
+form.addEventListener('submit', (e) => {
+	e.preventDefault();
+	getUserInputs();
 	dialog.close();
-})
+});
+
+cancelThenCloseDialog.addEventListener('click', (e) => {
+	e.preventDefault()
+	console.log("click CANCEL, and script to preventDefault")
+	dialog.close();
+	console.log(cancelThenCloseDialog.value)
+});
+
+function getUserInputs() {
+	const titleValue = document.querySelector('#input-title').value;
+	const authorValue = document.querySelector('#input-author').value;
+	const pagesValue = document.querySelector('#input-pages').value;
+	const statusValue = document.querySelector('#input-read-it').value;
+	const addNewBook = new Book(titleValue, authorValue, pagesValue, statusValue);
+	addNewBook.stackTheBookDisplay();
+
+}
+

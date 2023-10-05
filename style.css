@@ -17,7 +17,7 @@ button {
 
 #add-book-dialog {
     padding: 1em;
-    max-width: 5och;
+    max-width: 50ch;
     border: 0;
     box-shadow: 0 0 1em rgb(0 0 0 / .3);
     /* the following 3 lines make the modal dialog centered */

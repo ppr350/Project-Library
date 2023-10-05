@@ -21,7 +21,7 @@
         </div>
 
         <dialog id="add-book-dialog">
-            <form action="" method="dialog" name="add-book">
+            <form action="" method="dialog" id="form" name="add-book">
                 <fieldset>
                     <p>WHAT BOOK WOULD YOU LIKE TO ADD?</p>
                     <p class="input-title-section">
@@ -33,7 +33,7 @@
                             name="input-title"
                             placeholder="BOOK TITLE"
                             minlength="1"
-                            maxlength="40">
+                            maxlength="40" required>
                     </p>
                     <p class="input-author-section">
                         <label for="input-author">AUTHOR:</label>
@@ -44,7 +44,7 @@
                             name="input-author"
                             placeholder="AUTHOR"
                             minlength="1"
-                            maxlength="20">
+                            maxlength="20" required>
                     </p>
                     <p class="input-pages-section">
                         <label for="input-pages">TOTAL PAGES:</label>
@@ -59,28 +59,33 @@
                     </p>
                     <p class="input-read-it-section">
                         <label for="input-read-it">HAVE YOU READ IT?</label>
-                        <input
-                            type="checkbox"
+                        <select
                             id="input-read-it"
-                            data-checkbox-input="read-it"
+                            data-option-input="read-it"
                             name="input-read-it"
-                            value="YES">
+                            >
+                            <option value="yes" selected>YES</option>
+                            <option value="no">NO</option>
+                        </select>
                     </p>
+
+                    <div id="close-dialog">
+                        <button
+                            class="button"
+                            id="add-now-button"
+                            data-input="add"
+                            type="submit">ADD</button>
+
+                        <button
+                            class="button"
+                            id="cancel-button"
+                            value="cancel"
+                            formmethod="dialog"
+                            data-input="cancel"
+                            type="submit">CANCEL</button>
+                    </div>
                 </fieldset>
 
-                <div id="close-dialog">
-                    <button
-                        class="button"
-                        id="add-now-button"
-                        data-input="add"
-                        type="submit">ADD</button>
-
-                    <button
-                        class="button"
-                        id="cancel-button"
-                        data-input="cancel"
-                        type="submit">CANCEL</button>
-                </div>
 
             </form>
         </dialog>
