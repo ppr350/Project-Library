@@ -19,6 +19,7 @@ function Book(title, author, pages, readIt) {
 
 // Constructor invocation to change READING STATUS //
 Book.prototype.changeReadingStatus = function() {
+	debugger
 	this.readIt = !this.readIt;
 	const bookTitleRegExed = this.title.replace(/\s/g, "");
 	String(bookTitleRegExed);
@@ -82,14 +83,15 @@ const irishMythsAndLegends = new Book("Irish Myths And Legend", "Lady Gregory", 
 // Test call //
 // pythonCrashCourse.stackTheBookDisplay();
 // pythonCrashCourse.changeReadingStatus();
+irishMythsAndLegends.stackTheBookDisplay();
 
 const form = document.querySelector('form');
 const dialog = document.querySelector('#add-book-dialog')
 const showDialog = document.querySelector('#show-dialog-button');
-const inputedTitle = document.querySelector('#input-title');
-const inputedAuthor = document.querySelector('#input-author');
-const inputedPages = document.querySelector('#input-pages');
-const inputedReadIt = document.querySelector('#input-read-it')
+// const inputedTitle = document.querySelector('#input-title');
+// const inputedAuthor = document.querySelector('#input-author');
+// const inputedPages = document.querySelector('#input-pages');
+// const inputedReadIt = document.querySelector('#input-read-it')
 const addBookThenCloseDialog = document.querySelector('#add-now-button');
 const cancelThenCloseDialog = document.querySelector('#cancel-button');
 
@@ -97,13 +99,13 @@ showDialog.addEventListener('click', () => {
 	dialog.showModal();
 })
 
-inputedTitle.addEventListener('change', (e) => {
-	addBookThenCloseDialog.value += inputedTitle.value;
-});
+// inputedTitle.addEventListener('change', (e) => {
+// 	addBookThenCloseDialog.value += inputedTitle.value;
+// });
 
-inputedAuthor.addEventListener('change', (e) => {
-	addBookThenCloseDialog.value += inputedAuthor.value;
-})
+// inputedAuthor.addEventListener('change', (e) => {
+// 	addBookThenCloseDialog.value += inputedAuthor.value;
+// })
 
 form.addEventListener('submit', (e) => {
 	e.preventDefault();
@@ -122,9 +124,20 @@ function getUserInputs() {
 	const titleValue = document.querySelector('#input-title').value;
 	const authorValue = document.querySelector('#input-author').value;
 	const pagesValue = document.querySelector('#input-pages').value;
-	const statusValue = document.querySelector('#input-read-it').value;
-	const addNewBook = new Book(titleValue, authorValue, pagesValue, statusValue);
-	addNewBook.stackTheBookDisplay();
+	// const statusValue = document.querySelector('#input-read-it').value;
 
+	let getStatus = document.querySelector('#input-read-it');
+	let statusValue;
+	if (getStatus.value === 'yes') {
+		statusValue = true;
+	} else if (getStatus.value === 'no') {
+		statusValue = false;
+	};
+	// const statusValue = getStatus.value;
+	// console.log(statusValue);
+	let addNewBook = new Book(titleValue, authorValue, pagesValue, statusValue);
+	addNewBook.stackTheBookDisplay();
+	debugger
+	Object.setPrototypeOf(this.addNewBook, Book.prototype);
 }
 
