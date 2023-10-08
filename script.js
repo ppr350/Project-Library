@@ -70,6 +70,11 @@ Book.prototype.stackTheBookDisplay = function() {
 	thisBook.appendChild(bookReadingStatus);
 }
 
+const a = function addNewBook() {
+	let newBook = new Book(this.titleValue, this.authorValue, this.pagesValue, this.statusValue);
+	console.log(this)
+}
+
 // Constructor invocation to display the book on the page //
 
 // Constructor invocation with "new" keyword to add BOOKS to the Book function above //
@@ -79,22 +84,18 @@ Book.prototype.stackTheBookDisplay = function() {
 
 // const thinkLikeAProgrammer = new Book("Think Like A Programmer", "V. Anton Spraul", true);
 
-const irishMythsAndLegends = new Book("Irish Myths And Legend", "Lady Gregory", "456", false);
-console.log(irishMythsAndLegends);
+// const irishMythsAndLegends = new Book("Irish Myths And Legend", "Lady Gregory", "456", false);
+// console.log(irishMythsAndLegends);
 
 // Test call //
 // pythonCrashCourse.stackTheBookDisplay();
 // pythonCrashCourse.changeReadingStatus();
-irishMythsAndLegends.stackTheBookDisplay();
-irishMythsAndLegends.description();
+// irishMythsAndLegends.stackTheBookDisplay();
+// irishMythsAndLegends.description();
 
 const form = document.querySelector('form');
 const dialog = document.querySelector('#add-book-dialog')
 const showDialog = document.querySelector('#show-dialog-button');
-// const inputedTitle = document.querySelector('#input-title');
-// const inputedAuthor = document.querySelector('#input-author');
-// const inputedPages = document.querySelector('#input-pages');
-// const inputedReadIt = document.querySelector('#input-read-it')
 const addBookThenCloseDialog = document.querySelector('#add-now-button');
 const cancelThenCloseDialog = document.querySelector('#cancel-button');
 
@@ -102,13 +103,6 @@ showDialog.addEventListener('click', () => {
 	dialog.showModal();
 })
 
-// inputedTitle.addEventListener('change', (e) => {
-// 	addBookThenCloseDialog.value += inputedTitle.value;
-// });
-
-// inputedAuthor.addEventListener('change', (e) => {
-// 	addBookThenCloseDialog.value += inputedAuthor.value;
-// })
 
 form.addEventListener('submit', (e) => {
 	e.preventDefault();
@@ -137,58 +131,7 @@ function getUserInputs() {
 		statusValue = false;
 	};
 
-	// function Book(title, author, pages, readIt) {
-	// 	this.title = title,
-	// 	this.author = author,
-	// 	this.pages = pages,
-	// 	this.readIt = Boolean(readIt),
-	// 	this.description = function() {
-	// 		console.log(`${this.title} is written by ${this.author} and it has ${this.pages} pages.`)
-	// 		if (this.readIt === true) {
-	// 			console.log('I\'ve read it.')
-	// 		} else {
-	// 			console.log('I haven\'t read it yet.')
-	// 		}
-	// 	}
-	// 	return;
-	// }
-
-	// Book.prototype.stackTheBookDisplay = function() {
-
-	// 	// Create a div for THIS BOOK and be adopted by bookDisplay //
-	// 	const thisBook = document.createElement('div');
-	// 	thisBook.setAttribute("id", this.title.replace(/\s/g, ""));
-	// 	bookDisplay.appendChild(thisBook);
-	
-	// 	// Add BOOK TITLE to page //
-	// 	const bookTitle = document.createElement('p');
-	// 	bookTitle.classList.add('book-title');
-	// 	bookTitle.dataset.title = this.title;
-	// 	bookTitle.innerText = this.title;
-	// 	thisBook.appendChild(bookTitle);
-	
-	// 	// Add BOOK AUTHOR to page //
-	// 	const bookAuthor = document.createElement('p');
-	// 	bookAuthor.classList.add('book-author');
-	// 	bookAuthor.dataset.author = this.author;
-	// 	bookAuthor.innerText = this.author;
-	// 	thisBook.appendChild(bookAuthor);
-	
-	// 	// Add BOOK PAGES to page //
-	// 	const bookPages = document.createElement('p');
-	// 	bookPages.classList.add('book-pages');
-	// 	bookPages.dataset.pages = this.pages;
-	// 	bookPages.innerText = this.pages;
-	// 	thisBook.appendChild(bookPages);
-	
-	// 	// Add BOOK READING STATUS to page //
-	// 	const bookReadingStatus = document.createElement('p');
-	// 	bookReadingStatus.classList.add('book-status');
-	// 	bookReadingStatus.innerText = this.readIt === true ? "YES" : "NO";
-	// 	bookReadingStatus.dataset.status = this.readIt === true ? "YES" : "NO";
-	// 	thisBook.appendChild(bookReadingStatus);
-	// }
-	
+	// addNewBook()
 
 	// const statusValue = getStatus.value;
 	// console.log(statusValue);
@@ -196,10 +139,10 @@ function getUserInputs() {
 	console.log(addNewBook)
 	addNewBook.stackTheBookDisplay();
 	addNewBook.description();
+	console.log(addNewBook.__proto__)
 
-	// const motherfocloir = new Book("MotherFocloir", "Darach O Seaghdha", "222", true);
-	// console.log(motherfocloir);
-	// motherfocloir.stackTheBookDisplay();
-	// motherfocloir.description();
+
+
 }
+
 
