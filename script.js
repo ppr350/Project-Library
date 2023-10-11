@@ -1,11 +1,11 @@
 const bookDisplay = document.getElementById("book-display");
 
-// Constructor invocation to add NEW BOOKS w//
+// Constructor function to add NEW BOOKS w//
 function Book(title, author, pages, readIt) {
 	this.title = title,
 	this.author = author,
 	this.pages = pages,
-	this.readIt = Boolean(readIt),
+	this.status = Boolean(readIt),
 	this.description = function() {
 		console.log(`${this.title} is written by ${this.author} and it has ${this.pages} pages.`)
 		if (this.readIt === true) {
@@ -17,7 +17,7 @@ function Book(title, author, pages, readIt) {
 	return;
 }
 
-// Constructor invocation to change READING STATUS //
+// Prototype function of Book to change READING STATUS //
 Book.prototype.changeReadingStatus = function() {
 
 	this.readIt = !this.readIt;
@@ -34,6 +34,28 @@ Book.prototype.changeReadingStatus = function() {
 	}
 }
 
+// New empty object to be ready to store new book info when Book.prototype.add() is called //
+let newBook = {};
+
+// Prototype function of Book to be get new Book info from user //
+Book.prototype.add = function() {
+	const title = document.querySelector('#input-title').value;
+	const author = document.querySelector('#input-author').value;
+	const pages = document.querySelector('#input-pages').value;
+	let getStatus = document.querySelector('#input-read-it');
+	let statusValue;
+	if (getStatus.value === 'true') {
+		statusValue = true;
+	} else if (getStatus.value === 'false') {
+		statusValue = false;
+	};
+
+	newBook = new Book(title, author, pages, statusValue);
+	return;
+}
+
+
+// Prototype function of Book to display Book instances to page //
 Book.prototype.stackTheBookDisplay = function() {
 
 	// Create a div for THIS BOOK and be adopted by bookDisplay //
@@ -70,12 +92,9 @@ Book.prototype.stackTheBookDisplay = function() {
 	thisBook.appendChild(bookReadingStatus);
 }
 
-const a = function addNewBook() {
-	let newBook = new Book(this.titleValue, this.authorValue, this.pagesValue, this.statusValue);
-	console.log(this)
+Book.prototype.removeBookFromDisplay = {
+	// code here //
 }
-
-// Constructor invocation to display the book on the page //
 
 // Constructor invocation with "new" keyword to add BOOKS to the Book function above //
 // const pythonCrashCourse = new Book("Python Crash Course", "Eric Matthes", "552", true);
@@ -84,8 +103,9 @@ const a = function addNewBook() {
 
 // const thinkLikeAProgrammer = new Book("Think Like A Programmer", "V. Anton Spraul", true);
 
-// const irishMythsAndLegends = new Book("Irish Myths And Legend", "Lady Gregory", "456", false);
-// console.log(irishMythsAndLegends);
+const irishMythsAndLegends = new Book("Irish Myths And Legend", "Lady Gregory", "456", false);
+console.log(irishMythsAndLegends);
+console.log(Object.getPrototypeOf(irishMythsAndLegends));
 
 // Test call //
 // pythonCrashCourse.stackTheBookDisplay();
@@ -105,44 +125,21 @@ showDialog.addEventListener('click', () => {
 
 
 form.addEventListener('submit', (e) => {
+	// Prevent the default behavior of submitting form //
 	e.preventDefault();
-	getUserInputs();
+	// Call this prototype function to get newly inputted book info by user pass the info to become an instance of Book //
+	Book.prototype.add();
+	// Call this prototype function to add the Book instance to the display //
+	newBook.stackTheBookDisplay();
+	console.log(newBook);
+	console.log(Object.getPrototypeOf(newBook));
 	dialog.close();
 });
 
 cancelThenCloseDialog.addEventListener('click', (e) => {
+	// Prevent the default behavior of submitting form //
 	e.preventDefault()
 	console.log("click CANCEL, and script to preventDefault")
 	dialog.close();
-	console.log(cancelThenCloseDialog.value)
 });
-
-function getUserInputs() {
-	const titleValue = document.querySelector('#input-title').value;
-	const authorValue = document.querySelector('#input-author').value;
-	const pagesValue = document.querySelector('#input-pages').value;
-	// const statusValue = document.querySelector('#input-read-it').value;
-	// debugger
-	let getStatus = document.querySelector('#input-read-it');
-	let statusValue;
-	if (getStatus.value === 'true') {
-		statusValue = true;
-	} else if (getStatus.value === 'false') {
-		statusValue = false;
-	};
-
-	// addNewBook()
-
-	// const statusValue = getStatus.value;
-	// console.log(statusValue);
-	let addNewBook = new Book(titleValue, authorValue, pagesValue, statusValue);
-	console.log(addNewBook)
-	addNewBook.stackTheBookDisplay();
-	addNewBook.description();
-	console.log(addNewBook.__proto__)
-
-
-
-}
-
 
