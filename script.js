@@ -1,14 +1,14 @@
 const bookDisplay = document.getElementById("book-display");
 
 // Constructor function to add NEW BOOKS w//
-function Book(title, author, pages, readIt) {
+function Book(title, author, pages, read) {
 	this.title = title,
 	this.author = author,
 	this.pages = pages,
-	this.status = Boolean(readIt),
+	this.status = Boolean(read),
 	this.description = function() {
 		console.log(`${this.title} is written by ${this.author} and it has ${this.pages} pages.`)
-		if (this.readIt === true) {
+		if (this.status === true) {
 			console.log('I\'ve read it.')
 		} else {
 			console.log('I haven\'t read it yet.')
@@ -19,10 +19,9 @@ function Book(title, author, pages, readIt) {
 
 // Prototype function of Book to change READING STATUS //
 Book.prototype.changeReadingStatus = function() {
-
-	this.readIt = !this.readIt;
+	this.status = !this.status;
 	const bookTitleRegExed = this.title.replace(/\s/g, "");
-	String(bookTitleRegExed);
+	// String(bookTitleRegExed);
 	const thisBook = document.getElementById(bookTitleRegExed);
 	const thisBookStatus = thisBook.getElementsByClassName('book-status')[0];
 	if (thisBookStatus.getAttribute('data-status') === 'YES') {
@@ -42,18 +41,11 @@ Book.prototype.add = function() {
 	const title = document.querySelector('#input-title').value;
 	const author = document.querySelector('#input-author').value;
 	const pages = document.querySelector('#input-pages').value;
-	let getStatus = document.querySelector('#input-read-it');
-	let statusValue;
-	if (getStatus.value === 'true') {
-		statusValue = true;
-	} else if (getStatus.value === 'false') {
-		statusValue = false;
-	};
-
-	newBook = new Book(title, author, pages, statusValue);
-	return;
+	let readIt = document.querySelector('#input-read-it');
+	let status;
+	readIt.value === 'true' ? status = true : false;
+	newBook = new Book(title, author, pages, status);
 }
-
 
 // Prototype function of Book to display Book instances to page //
 Book.prototype.stackTheBookDisplay = function() {
@@ -87,14 +79,25 @@ Book.prototype.stackTheBookDisplay = function() {
 	// Add BOOK READING STATUS to page //
 	const bookReadingStatus = document.createElement('p');
 	bookReadingStatus.classList.add('book-status');
-	bookReadingStatus.innerText = this.readIt === true ? "YES" : "NO";
-	bookReadingStatus.dataset.status = this.readIt === true ? "YES" : "NO";
+	bookReadingStatus.innerText = this.status === true ? "YES" : "NO";
+	bookReadingStatus.dataset.status = this.status === true ? "YES" : "NO";
 	thisBook.appendChild(bookReadingStatus);
+
+	// Add a button to change STATUS //
+	const statusButton = document.createElement('button');
+	statusButton.classList.add('button');
+	statusButton.setAttribute('id', this.title.replace(/\s/g, "-") + '-status-button')
+	statusButton.innerText = 'CHANGE STATUS';
+	thisBook.appendChild(statusButton);
+
+	// Add a button to remove BOOK //
+	const removeButton = document.createElement('button');
+	removeButton.classList.add('remove-button', 'button');
+	// removeButton.setAttribute('id', this.title.replace(/\s/g, "") + 'RemoveButton')
+	removeButton.innerText = 'REMOVE';
+	thisBook.appendChild(removeButton);
 }
 
-Book.prototype.removeBookFromDisplay = {
-	// code here //
-}
 
 // Constructor invocation with "new" keyword to add BOOKS to the Book function above //
 // const pythonCrashCourse = new Book("Python Crash Course", "Eric Matthes", "552", true);
@@ -110,7 +113,7 @@ console.log(Object.getPrototypeOf(irishMythsAndLegends));
 // Test call //
 // pythonCrashCourse.stackTheBookDisplay();
 // pythonCrashCourse.changeReadingStatus();
-// irishMythsAndLegends.stackTheBookDisplay();
+irishMythsAndLegends.stackTheBookDisplay();
 // irishMythsAndLegends.description();
 
 const form = document.querySelector('form');
@@ -123,6 +126,21 @@ showDialog.addEventListener('click', () => {
 	dialog.showModal();
 })
 
+// Remove Book, link this function to book //
+
+const removeBook = bookDisplay.addEventListener('click', (e) => {
+	// debugger
+	// removeBook.classList.add('')
+	console.log("clicked")
+})
+for (let i = 0; i < removeBook.length; i++) {
+	const button = removeBook[i]
+	button.addEventListener('click', (e) => {
+		const buttonClicked = e.target
+		console.log('clicked')
+		buttonClicked.parentElement.remove()
+	})
+}
 
 form.addEventListener('submit', (e) => {
 	// Prevent the default behavior of submitting form //
