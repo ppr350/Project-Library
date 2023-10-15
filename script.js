@@ -90,7 +90,13 @@ Book.prototype.stackTheBookDisplay = function() {
 	statusButton.innerText = 'CHANGE STATUS';
 	thisBook.appendChild(statusButton);
 	statusButton.addEventListener('click', function() {
-		this.changeReadingStatus();
+		console.log('change status')
+		console.log(thisBook.innerText)
+		let thisBookStatus = thisBook.querySelector('.book-status')
+		console.log(thisBookStatus)
+		// thisBook.bookReadingStatusinnerText = this.status === true ? "NO" : "YES";
+		// bookReadingStatus.dataset.status = this.status === true ? "NO" : "YES";
+		// thisBook.changeReadingStatus();
 	})
 
 	// Add a button to remove BOOK //
@@ -130,22 +136,6 @@ const cancelThenCloseDialog = document.querySelector('#cancel-button');
 showDialog.addEventListener('click', () => {
 	dialog.showModal();
 })
-
-// Remove Book, link this function to book //
-
-// const removeBook = bookDisplay.addEventListener('click', (e) => {
-// 	// debugger
-// 	// removeBook.classList.add('')
-// 	console.log("clicked")
-// })
-// for (let i = 0; i < removeBook.length; i++) {
-// 	const button = removeBook[i]
-// 	button.addEventListener('click', (e) => {
-// 		const buttonClicked = e.target
-// 		console.log('clicked')
-// 		buttonClicked.parentElement.remove()
-// 	})
-// }
 
 form.addEventListener('submit', (e) => {
 	// Prevent the default behavior of submitting form //
