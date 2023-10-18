@@ -28,10 +28,10 @@ Book.prototype.changeReadingStatus = function() {
 	const thisBookStatus = thisBook.getElementsByClassName('book-status')[0];
 	if (thisBookStatus.getAttribute('data-status') === 'YES') {
 		thisBookStatus.setAttribute('data-status', 'NO');
-		thisBookStatus.innerText = 'NO';
+		thisBookStatus.innerText = 'IN PROGRESS';
 	} else {
 		thisBookStatus.setAttribute('data-status', 'YES');
-		thisBookStatus.innerText = 'YES';
+		thisBookStatus.innerText = 'COMPLETED';
 	}
 }
 
@@ -42,12 +42,26 @@ let newBook = {};
 Book.prototype.add = function() {
 
 	const title = document.querySelector('#input-title').value;
+
+	const getExistingBooks = document.querySelectorAll('.book-title');
+		for (let i = 0; i < getExistingBooks.length; i++) {
+			if (getExistingBooks[i].innerText === title) {
+				alert('It appears that you already have this book in your library')
+				
+				return
+			}
+		}
+
 	const author = document.querySelector('#input-author').value;
 	const pages = document.querySelector('#input-pages').value;
 	let readIt = document.querySelector('#input-read-it');
 	let status;
 	readIt.value === 'true' ? status = true : false;
 	newBook = new Book(title, author, pages, status);
+
+	// Display the new book using its 'sibling' prototype function //
+	newBook.stackTheBookDisplay();
+
 }
 
 // Prototype function of Book to display Book instances to page //
@@ -69,20 +83,20 @@ Book.prototype.stackTheBookDisplay = function() {
 	const bookAuthor = document.createElement('p');
 	bookAuthor.classList.add('book-author');
 	bookAuthor.dataset.author = this.author;
-	bookAuthor.innerText = this.author;
+	bookAuthor.innerText = 'by '+ this.author;
 	thisBook.appendChild(bookAuthor);
 
 	// Add BOOK PAGES to page //
 	const bookPages = document.createElement('p');
 	bookPages.classList.add('book-pages');
 	bookPages.dataset.pages = this.pages;
-	bookPages.innerText = this.pages;
+	bookPages.innerText = this.pages + ' pages';
 	thisBook.appendChild(bookPages);
 
 	// Add BOOK READING STATUS to page //
 	const bookReadingStatus = document.createElement('p');
 	bookReadingStatus.classList.add('book-status');
-	bookReadingStatus.innerText = this.status === true ? "YES" : "NO";
+	bookReadingStatus.innerText = this.status === true ? "COMPLETED" : "IN PROGRESS";
 	bookReadingStatus.dataset.status = this.status === true ? "YES" : "NO";
 	thisBook.appendChild(bookReadingStatus);
 
@@ -112,14 +126,18 @@ irishMythsAndLegends.stackTheBookDisplay();
 
 // INPUT DIALOG //
 const form = document.querySelector('form');
-const dialog = document.querySelector('#add-book-dialog')
+const addBookDialog = document.querySelector('#add-book-dialog');
 const showDialog = document.querySelector('#show-dialog-button');
 const addBookThenCloseDialog = document.querySelector('#add-now-button');
 const cancelThenCloseDialog = document.querySelector('#cancel-button');
 
+// WARNING DIALOG //
+const warningDialog = document.querySelector('#warning-dialog');
+const warningDialogButton = document.querySelector('#warning-button');
+
 // Add button to show INPUT DIALOG //
 showDialog.addEventListener('click', () => {
-	dialog.showModal();
+	addBookDialog.showModal();
 });
 
 // Add functionality to INPUT DIALOG //
@@ -129,14 +147,13 @@ form.addEventListener('submit', (e) => {
 	// Call this prototype function to get newly inputted book info by user pass the info to become an instance of Book //
 	Book.prototype.add();
 	// Call this prototype function to add the Book instance to the display //
-	newBook.stackTheBookDisplay();
-	dialog.close();
+	addBookDialog.close();
 });
 
 // Add button to close and cancel INPUT DIALOG //
 cancelThenCloseDialog.addEventListener('click', (e) => {
 	// Prevent the default behavior of submitting form //
 	e.preventDefault()
-	dialog.close();
+	addBookDialog.close();
 });
 

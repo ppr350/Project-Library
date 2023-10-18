@@ -9,7 +9,10 @@
 </head>
 <body>
     
-    <div id="book-display">
+    <div id="top-menu">
+
+        <h1 id="site-name">BOOKCAVE</h1>
+        <h3>a project by Chee Hong "Kobe" Wong</h3>
 
         <!-- add book button -->
         <div id="open-dialog">
@@ -19,6 +22,17 @@
                 class="button"
                 type="submit">+ ADD BOOK</button>
         </div>
+    </div>
+
+    <div id="book-display">
+
+
+
+    </div>
+
+
+
+    <div id="dialog container">
 
         <dialog id="add-book-dialog">
             <form action="" method="dialog" id="form" name="add-book">
@@ -90,7 +104,22 @@
             </form>
         </dialog>
 
+        <dialog id="warning-dialog">
+            <p>It seems like you already have this book in your collection.</p>
+            <button
+                class="button"
+                id="warning-button"
+                data-input="cancel"
+                value="cancel"
+                formmethod="dialog"
+                type="submit">OK</button>
+        </dialog>
+
     </div>
+
+    <footer>
+        about me
+    </footer>
 
 </body>
 </html>
