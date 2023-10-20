@@ -43,12 +43,12 @@ Book.prototype.add = function() {
 
 	const title = document.querySelector('#input-title').value;
 
+	// Check if user has entered a same book that exists in their collection //
 	const getExistingBooks = document.querySelectorAll('.book-title');
 		for (let i = 0; i < getExistingBooks.length; i++) {
 			if (getExistingBooks[i].innerText === title) {
-				alert('It appears that you already have this book in your library')
-				
-				return
+				warningDialog.showModal()				
+				return;
 			}
 		}
 
@@ -61,7 +61,6 @@ Book.prototype.add = function() {
 
 	// Display the new book using its 'sibling' prototype function //
 	newBook.stackTheBookDisplay();
-
 }
 
 // Prototype function of Book to display Book instances to page //
@@ -102,7 +101,7 @@ Book.prototype.stackTheBookDisplay = function() {
 
 	// Add a button to change STATUS //
 	const statusButton = document.createElement('button');
-	statusButton.classList.add('button');
+	statusButton.classList.add('status-button');
 	statusButton.setAttribute('id', this.title.replace(/\s/g, "-") + '-status-button')
 	statusButton.innerText = 'CHANGE STATUS';
 	thisBook.appendChild(statusButton);
@@ -124,6 +123,33 @@ Book.prototype.stackTheBookDisplay = function() {
 const irishMythsAndLegends = new Book("Irish Myths And Legend", "Lady Gregory", "456", false);
 irishMythsAndLegends.stackTheBookDisplay();
 
+const tugOfWar = new Book("Tug Of War", "Carly Rae Jepsen", "12", true);
+tugOfWar.stackTheBookDisplay();
+
+const curiousity = new Book("Curiousity", "Carly Rae Jepsen", "8", true);
+curiousity.stackTheBookDisplay();
+
+const kiss = new Book("Kiss", "Carly Rae Jepsen", "16", true);
+kiss.stackTheBookDisplay();
+
+const emotion = new Book("Emotion", "Carly Rae Jepsen", "17", true);
+emotion.stackTheBookDisplay();
+
+const emotionSideB = new Book("Emotion Side B", "Carly Rae Jepsen", "9", true);
+emotionSideB.stackTheBookDisplay();
+
+const dedicated = new Book("Dedicated", "Carly Rae Jepsen", "14", true);
+dedicated.stackTheBookDisplay();
+
+const dedicatedSideB = new Book("Dedicated Side B", "Carly Rae Jepsen", "14", true);
+dedicatedSideB.stackTheBookDisplay();
+
+const theLoneliestTime = new Book("The Loneliest Time", "Carly Rae Jepsen", true);
+theLoneliestTime.stackTheBookDisplay();
+
+const theLoveliestTime = new Book("The Loveliest Time", "Carly Rae Jepsen", true);
+theLoveliestTime.stackTheBookDisplay();
+
 // INPUT DIALOG //
 const form = document.querySelector('form');
 const addBookDialog = document.querySelector('#add-book-dialog');
@@ -131,11 +157,7 @@ const showDialog = document.querySelector('#show-dialog-button');
 const addBookThenCloseDialog = document.querySelector('#add-now-button');
 const cancelThenCloseDialog = document.querySelector('#cancel-button');
 
-// WARNING DIALOG //
-const warningDialog = document.querySelector('#warning-dialog');
-const warningDialogButton = document.querySelector('#warning-button');
-
-// Add button to show INPUT DIALOG //
+// Add a button to show INPUT DIALOG //
 showDialog.addEventListener('click', () => {
 	addBookDialog.showModal();
 });
@@ -150,10 +172,22 @@ form.addEventListener('submit', (e) => {
 	addBookDialog.close();
 });
 
-// Add button to close and cancel INPUT DIALOG //
+// Add a button to close and cancel INPUT DIALOG //
 cancelThenCloseDialog.addEventListener('click', (e) => {
 	// Prevent the default behavior of submitting form //
 	e.preventDefault()
 	addBookDialog.close();
 });
+
+// WARNING DIALOG //
+const warningDialog = document.querySelector('#warning-dialog');
+const warningDialogButton = document.querySelector('#warning-button');
+
+// Add a button to close the "It appears that you already have this book in your library" dialog //
+warningDialogButton.addEventListener('click', (e) => {
+	warningDialog.close();
+	addBookDialog.showModal();
+})
+
+
 

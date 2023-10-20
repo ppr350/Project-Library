@@ -6,120 +6,123 @@
     <script defer src="script.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Project: Library</title>
+    <link rel="icon" type="image/x-icon" href="MyAvatar.ico">
 </head>
 <body>
     
-    <div id="top-menu">
+    <div id="container">
 
-        <h1 id="site-name">BOOKCAVE</h1>
-        <h3>a project by Chee Hong "Kobe" Wong</h3>
+        <div id="top-menu">
 
-        <!-- add book button -->
-        <div id="open-dialog">
-            <button
-                id="show-dialog-button"
-                data-dialog="show"
-                class="button"
-                type="submit">+ ADD BOOK</button>
+            <h1 id="site-name">BOOKCAVE</h1>
+            <h3>A PROJECT BY CHEE HONG "KOBE" WONG</h3>
+
+            <!-- add book button -->
+            <div id="open-dialog">
+                <button
+                    id="show-dialog-button"
+                    data-dialog="show"
+                    class="button"
+                    type="submit">+ ADD BOOK</button>
+            </div>
         </div>
+
+        <div id="book-display">
+
+        </div>
+
+        <div id="dialog container">
+
+            <dialog id="add-book-dialog" class="dialog">
+                <form action="" method="dialog" id="form" name="add-book">
+                    <fieldset>
+                        <p>WHAT BOOK WOULD YOU LIKE TO ADD?</p>
+                        <p class="input-title-section">
+                            <label for="input-title">TITLE:</label>
+                            <input 
+                                type="text"
+                                id="input-title"
+                                data-input="title"
+                                name="input-title"
+                                placeholder="BOOK TITLE"
+                                minlength="1"
+                                maxlength="40" required>
+                        </p>
+                        <p class="input-author-section">
+                            <label for="input-author">AUTHOR:</label>
+                            <input 
+                                type="text"
+                                id="input-author"
+                                data-input="author"
+                                name="input-author"
+                                placeholder="AUTHOR"
+                                minlength="1"
+                                maxlength="20" required>
+                        </p>
+                        <p class="input-pages-section">
+                            <label for="input-pages">TOTAL PAGES:</label>
+                            <input 
+                                type="number"
+                                id="input-pages"
+                                data-input="pages"
+                                name="input-pages"
+                                placeholder="TOTAL PAGES"
+                                minlength="1"
+                                maxlength="5000">
+                        </p>
+                        <p class="input-read-it-section">
+                            <label for="input-read-it">HAVE YOU READ IT?</label>
+                            <select
+                                id="input-read-it"
+                                data-option-input="read-it"
+                                name="input-read-it"
+                                >
+                                <option value="true">YES</option>
+                                <option value="false">NO</option>
+                            </select>
+                        </p>
+
+                        <div id="close-dialog">
+                            <button
+                                class="button"
+                                id="add-now-button"
+                                data-input="add"
+                                type="submit">ADD</button>
+
+                            <button
+                                class="button"
+                                id="cancel-button"
+                                value="cancel"
+                                formmethod="dialog"
+                                data-input="cancel"
+                                type="submit">CANCEL</button>
+                        </div>
+                    </fieldset>
+
+
+                </form>
+            </dialog>
+
+            <dialog id="warning-dialog" class="dialog">
+                <p class="error-message">
+                    It seems like you already have this book in your collection.</p>
+                <button
+                    class="button"
+                    id="warning-button"
+                    data-input="cancel"
+                    value="cancel"
+                    formmethod="dialog"
+                    type="submit">OK</button>
+            </dialog>
+
+        </div>
+
+        <footer id="about-me">
+            <p>about me</p>
+            <p>I am a passionate self-learning web development student based in Ireland. I have a passion project called <a href="https://ppr350.github.io/irish_learning_blog/">Irish Learning Blog</a>. I also enjoy photography and photo-editing.</p>
+        </footer>
+    
     </div>
-
-    <div id="book-display">
-
-
-
-    </div>
-
-
-
-    <div id="dialog container">
-
-        <dialog id="add-book-dialog">
-            <form action="" method="dialog" id="form" name="add-book">
-                <fieldset>
-                    <p>WHAT BOOK WOULD YOU LIKE TO ADD?</p>
-                    <p class="input-title-section">
-                        <label for="input-title">TITLE:</label>
-                        <input 
-                            type="text"
-                            id="input-title"
-                            data-input="title"
-                            name="input-title"
-                            placeholder="BOOK TITLE"
-                            minlength="1"
-                            maxlength="40" required>
-                    </p>
-                    <p class="input-author-section">
-                        <label for="input-author">AUTHOR:</label>
-                        <input 
-                            type="text"
-                            id="input-author"
-                            data-input="author"
-                            name="input-author"
-                            placeholder="AUTHOR"
-                            minlength="1"
-                            maxlength="20" required>
-                    </p>
-                    <p class="input-pages-section">
-                        <label for="input-pages">TOTAL PAGES:</label>
-                        <input 
-                            type="number"
-                            id="input-pages"
-                            data-input="pages"
-                            name="input-pages"
-                            placeholder="TOTAL PAGES"
-                            minlength="1"
-                            maxlength="5000">
-                    </p>
-                    <p class="input-read-it-section">
-                        <label for="input-read-it">HAVE YOU READ IT?</label>
-                        <select
-                            id="input-read-it"
-                            data-option-input="read-it"
-                            name="input-read-it"
-                            >
-                            <option value="true">YES</option>
-                            <option value="false">NO</option>
-                        </select>
-                    </p>
-
-                    <div id="close-dialog">
-                        <button
-                            class="button"
-                            id="add-now-button"
-                            data-input="add"
-                            type="submit">ADD</button>
-
-                        <button
-                            class="button"
-                            id="cancel-button"
-                            value="cancel"
-                            formmethod="dialog"
-                            data-input="cancel"
-                            type="submit">CANCEL</button>
-                    </div>
-                </fieldset>
-
-
-            </form>
-        </dialog>
-
-        <dialog id="warning-dialog">
-            <p>It seems like you already have this book in your collection.</p>
-            <button
-                class="button"
-                id="warning-button"
-                data-input="cancel"
-                value="cancel"
-                formmethod="dialog"
-                type="submit">OK</button>
-        </dialog>
-
-    </div>
-
-    <footer>
-        about me
-    </footer>
 
 </body>
 </html>
