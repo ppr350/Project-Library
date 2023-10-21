@@ -26,6 +26,7 @@ button {
     padding: calc(0.5vmin + 0.3px);
     margin: calc(0.1vmin + 0.1px);
     background-color: rgb(255, 255, 255);
+    color: black;
 }
 
 dialog {
@@ -62,7 +63,6 @@ dialog {
         "content content"
         "content content"
         "footer footer";
-    position: relative;
     min-height: 100vh;
 }
 
@@ -109,7 +109,6 @@ h3 {
 #about-me {
     grid-area: footer;
     background-color: rgb(205, 205, 253);
-    position: absolute;
     bottom: 0;
     width: 100%;
     margin-top: auto;
@@ -118,6 +117,7 @@ h3 {
 #about-me > p {
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
+    font-size: clamp(0.75rem, 0.7rem + 0.25vw, 1rem);
 }
 
 @media only screen and (min-width: 600px) {
