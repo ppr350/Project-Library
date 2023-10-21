@@ -26,6 +26,8 @@ button {
     padding: calc(0.5vmin + 0.3px);
     margin: calc(0.1vmin + 0.1px);
     background-color: rgb(255, 255, 255);
+    -webkit-text-fill-color: black;
+    -webkit-opacity: 1;
     color: black;
 }
 
@@ -64,6 +66,7 @@ dialog {
         "content content"
         "footer footer";
     min-height: 100vh;
+    overflow: scroll;
 }
 
 #top-menu {
