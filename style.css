@@ -7,6 +7,7 @@
 }
 
 html {
+    /* this line of code gives the container div a height to grow */
     height: 100%;
 }
 
@@ -21,14 +22,15 @@ html, body {
 
 button {
     cursor: pointer;
-    border: 1px solid black;
+    border: 1px solid #000001;
     border-radius: 5px;
     padding: calc(0.5vmin + 0.3px);
     margin: calc(0.1vmin + 0.1px);
     background-color: rgb(255, 255, 255);
-    -webkit-text-fill-color: black;
+    /* the following 3 lines of code solved problem of Safari on mobile not displaying desired text colour */
+    -webkit-text-fill-color: #000001;
     -webkit-opacity: 1;
-    color: black;
+    color: #000001;
 }
 
 dialog {
@@ -45,10 +47,12 @@ dialog {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: 200ms ease-in-out;
-    & > * {
-        margin: 0 0 0.5rem 0;
-    }
+    transition: 0.5s;
+
+}
+
+#add-book-dialog[open] {
+    
 }
 
 #add-book-dialog::backdrop {
@@ -65,7 +69,9 @@ dialog {
         "content content"
         "content content"
         "footer footer";
+    /* this line of code gives the footer a reference screen size */
     min-height: 100vh;
+    /* prevent the content from hiding under the footer */
     overflow: scroll;
 }
 
@@ -114,7 +120,7 @@ h3 {
     background-color: rgb(205, 205, 253);
     bottom: 0;
     width: 100%;
-    margin-top: auto;
+    /* margin-top: auto; */
 }
 
 #about-me > p {
