@@ -57,6 +57,8 @@ Book.prototype.add = function() {
 	let readIt = document.querySelector('#input-read-it');
 	let status;
 	readIt.value === 'true' ? status = true : false;
+
+	// Generate a new Book by using the processed data
 	newBook = new Book(title, author, pages, status);
 
 	// Display the new book using its 'sibling' prototype function //
