@@ -51,10 +51,6 @@ dialog {
 
 }
 
-#add-book-dialog[open] {
-    
-}
-
 #add-book-dialog::backdrop {
     background: linear-gradient(45deg, red, blue);
     opacity: .4;
@@ -127,9 +123,4 @@ h3 {
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
     font-size: clamp(0.75rem, 0.7rem + 0.25vw, 1rem);
-}
-
-@media only screen and (min-width: 600px) {
-
-
 }
