@@ -28,12 +28,31 @@ The form can be dismissed by click the "CANCEL" button or pressing the "esc" key
 
 ### CSS
 
-As mentioned above, I want to make this site as accessible as possible, so I made efforts to make it fully responsive to all screen sizes.
+As mentioned above, I want to make this site as accessible as possible, so I made efforts to make it fully responsive to all screen sizes. I opted for simpler layout for this project as the main focus is JavaScript. CSS GRID is the main backbone for the CSS file. The main container of the HTML file has is the parent of the grid-template-area. 
+
+font-sizes are all controlled by the clamp() function. books are displayed in "card" style and it is written to be responsive to screen size.
 
 ### JavaScript
 
-This project uses Constructor function to generate new book. The "Book" constructor takes four arguments.
+This project uses Constructor function to generate new book. The Book constructor takes four arguments - title, author, pages and status. It also has a method called "description".
 
 I wrote three prototypes for this Book constuctor. The first one is "changeReadingStatus", as the name impplied, it changes the reading status. If the current status is "Work in Progress", calling this prototype fucntion changes the status to "Completed", or vice versa. When a book is added, a button called "CHANGE STATUS" will be generated to enable this functionality.
 
-The second prototype is called "add". Its roles is to take user inputs from the form, and use the processed data to construct a new Book by calling the Book constructor. Lastly, it calls "stackTheBookDisplay" prototype function (more info below) in order to stack this new Book object to the site.
+The second prototype function of Book constructor is called "add". Its roles is to take user inputs from the form, and use the processed data to construct a new Book object by calling the Book constructor. Lastly, it calls "stackTheBookDisplay" prototype function (more info below) in order to stack this new Book object to the site.
+
+The "stackTheBookDisplay" prototype function roles is to process the book data and displays the book to the page. It generates new HTML divs and paragraphs, add classes, ids and innertexts for the new Book object. It also adds two buttons - "CHANGE STATUS" and "REMOVE". The former listens to click and change reading status accordingly by calling the Book prototype function "changeReadingStatus"
+
+
+### Special Thanks
+
+[The Odin Projects and its Discord community, thank you for providing such an amazing course](https://www.theodinproject.com/)
+
+[Kevin Powell's video explaining on how to keep footer at the bottom, also all his videos about responsive design](https://youtu.be/yc2olxLgKLk?si=tfLgpOYTuWfgp74_)
+
+[ColorCode.io's Youtube series "20 things JavaScript Developers should know, but probably don't" is really awesome](https://www.youtube.com/watch?v=jnME98ckDbQ&list=PL1PqvM2UQiMoGNTaxFMSK2cih633lpFKP)
+
+[This video about ARIA HTML by DesignCourse](https://www.youtube.com/watch?v=0hqhAIjE_8I&t=674s)
+
+[MDN Web Docs for providing detailed guides](https://developer.mozilla.org/en-US/)
+
+[Stack Overflow](https://stackoverflow.com/)

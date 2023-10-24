@@ -121,37 +121,6 @@ Book.prototype.stackTheBookDisplay = function() {
 	});
 };
 
-// Test run //
-const irishMythsAndLegends = new Book("Irish Myths And Legend", "Lady Gregory", "456", false);
-irishMythsAndLegends.stackTheBookDisplay();
-
-const tugOfWar = new Book("Tug Of War", "Carly Rae Jepsen", "12", true);
-tugOfWar.stackTheBookDisplay();
-
-const curiousity = new Book("Curiousity", "Carly Rae Jepsen", "8", true);
-curiousity.stackTheBookDisplay();
-
-const kiss = new Book("Kiss", "Carly Rae Jepsen", "16", true);
-kiss.stackTheBookDisplay();
-
-const emotion = new Book("Emotion", "Carly Rae Jepsen", "17", true);
-emotion.stackTheBookDisplay();
-
-const emotionSideB = new Book("Emotion Side B", "Carly Rae Jepsen", "9", true);
-emotionSideB.stackTheBookDisplay();
-
-const dedicated = new Book("Dedicated", "Carly Rae Jepsen", "14", true);
-dedicated.stackTheBookDisplay();
-
-const dedicatedSideB = new Book("Dedicated Side B", "Carly Rae Jepsen", "14", true);
-dedicatedSideB.stackTheBookDisplay();
-
-const theLoneliestTime = new Book("The Loneliest Time", "Carly Rae Jepsen", true);
-theLoneliestTime.stackTheBookDisplay();
-
-const theLoveliestTime = new Book("The Loveliest Time", "Carly Rae Jepsen", true);
-theLoveliestTime.stackTheBookDisplay();
-
 // INPUT DIALOG //
 const form = document.querySelector('form');
 const addBookDialog = document.querySelector('#add-book-dialog');
