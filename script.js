@@ -1,125 +1,131 @@
 const bookDisplay = document.getElementById("book-display");
 
-// Constructor function to add NEW BOOKS w//
-function Book(title, author, pages, read) {
+// A collection of Mixins to later be assigned to class Book //
+let prototypeMixin = {
 
-	this.title = title,
-	this.author = author,
-	this.pages = pages,
-	this.status = Boolean(read),
-	this.description = function() {
-		console.log(`${this.title} is written by ${this.author} and it has ${this.pages} pages.`)
-		if (this.status === true) {
-			console.log('I\'ve read it.')
+	// Mixin function to change READING STATUS //
+	changeReadingStatus() {
+		this.status = !this.status;
+		const bookTitleRegExed = this.title.replace(/\s/g, "");
+		// String(bookTitleRegExed);
+		const thisBook = document.getElementById(bookTitleRegExed);
+		const thisBookStatus = thisBook.getElementsByClassName('book-status')[0];
+		if (thisBookStatus.getAttribute('data-status') === 'YES') {
+			thisBookStatus.setAttribute('data-status', 'NO');
+			thisBookStatus.innerText = 'IN PROGRESS';
 		} else {
-			console.log('I haven\'t read it yet.')
+			thisBookStatus.setAttribute('data-status', 'YES');
+			thisBookStatus.innerText = 'COMPLETED';
+		}
+	},
+
+	// Mixin function to be get new Book info from user //
+	add() {
+		const title = document.querySelector('#input-title').value;
+
+		// Check if user has entered a same book that exists in their collection //
+		const getExistingBooks = document.querySelectorAll('.book-title');
+			for (let i = 0; i < getExistingBooks.length; i++) {
+				if (getExistingBooks[i].innerText === title) {
+					warningDialog.showModal()				
+					return;
+				}
+			}
+
+		const author = document.querySelector('#input-author').value;
+		const pages = document.querySelector('#input-pages').value;
+		let readIt = document.querySelector('#input-read-it');
+		let status;
+		readIt.value === 'true' ? status = true : false;
+
+		// Generate a new Book by using the processed data
+		newBook = new Book(title, author, pages, status);
+
+		// Display the new book using its 'sibling' prototype function //
+		newBook.stackTheBookDisplay();
+	},
+
+	// Mixin function to display Book instances to page //
+	stackTheBookDisplay() {
+
+		// Create a div for THIS BOOK and be adopted by bookDisplay //
+		const thisBook = document.createElement('div');
+		thisBook.setAttribute("id", this.title.replace(/\s/g, ""));
+		bookDisplay.appendChild(thisBook);
+
+		// Add BOOK TITLE to page //
+		const bookTitle = document.createElement('p');
+		bookTitle.classList.add('book-title');
+		bookTitle.dataset.title = this.title;
+		bookTitle.innerText = this.title;
+		thisBook.appendChild(bookTitle);
+
+		// Add BOOK AUTHOR to page //
+		const bookAuthor = document.createElement('p');
+		bookAuthor.classList.add('book-author');
+		bookAuthor.dataset.author = this.author;
+		bookAuthor.innerText = 'by '+ this.author;
+		thisBook.appendChild(bookAuthor);
+
+		// Add BOOK PAGES to page //
+		const bookPages = document.createElement('p');
+		bookPages.classList.add('book-pages');
+		bookPages.dataset.pages = this.pages;
+		bookPages.innerText = this.pages + ' pages';
+		thisBook.appendChild(bookPages);
+
+		// Add BOOK READING STATUS to page //
+		const bookReadingStatus = document.createElement('p');
+		bookReadingStatus.classList.add('book-status');
+		bookReadingStatus.innerText = this.status === true ? "COMPLETED" : "IN PROGRESS";
+		bookReadingStatus.dataset.status = this.status === true ? "YES" : "NO";
+		thisBook.appendChild(bookReadingStatus);
+
+		// Add a button to change STATUS //
+		const statusButton = document.createElement('button');
+		statusButton.classList.add('status-button');
+		statusButton.setAttribute('id', this.title.replace(/\s/g, "-") + '-status-button')
+		statusButton.innerText = 'CHANGE STATUS';
+		thisBook.appendChild(statusButton);
+		statusButton.addEventListener('click', () => {
+			this.changeReadingStatus();
+		});
+
+		// Add a button to remove BOOK //
+		const removeButton = document.createElement('button');
+		removeButton.classList.add('remove-button', 'button');
+		removeButton.innerText = 'REMOVE';
+		thisBook.appendChild(removeButton);
+		removeButton.addEventListener('click', () => {
+			thisBook.remove();
+		});
+	}
+
+};
+
+// Constructor function to add NEW BOOKS w//
+class Book {
+	constructor(title, author, pages, read) {
+		this.title = title,
+		this.author = author,
+		this.pages = pages,
+		this.status = Boolean(read),
+		this.description = function() {
+			console.log(`${this.title} is written by ${this.author} and it has ${this.pages} pages.`)
+			if (this.status === true) {
+				console.log('I\'ve read it.')
+			} else {
+				console.log('I haven\'t read it yet.')
+			}
 		}
 	}
-	return;
-}
+};
 
-// Prototype function of Book to change READING STATUS //
-Book.prototype.changeReadingStatus = function() {
-
-	this.status = !this.status;
-	const bookTitleRegExed = this.title.replace(/\s/g, "");
-	// String(bookTitleRegExed);
-	const thisBook = document.getElementById(bookTitleRegExed);
-	const thisBookStatus = thisBook.getElementsByClassName('book-status')[0];
-	if (thisBookStatus.getAttribute('data-status') === 'YES') {
-		thisBookStatus.setAttribute('data-status', 'NO');
-		thisBookStatus.innerText = 'IN PROGRESS';
-	} else {
-		thisBookStatus.setAttribute('data-status', 'YES');
-		thisBookStatus.innerText = 'COMPLETED';
-	}
-}
+// Assign Mixins to class Book //
+Object.assign(Book.prototype, prototypeMixin)
 
 // New empty object to be ready to store new book info when Book.prototype.add() is called //
 let newBook = {};
-
-// Prototype function of Book to be get new Book info from user //
-Book.prototype.add = function() {
-
-	const title = document.querySelector('#input-title').value;
-
-	// Check if user has entered a same book that exists in their collection //
-	const getExistingBooks = document.querySelectorAll('.book-title');
-		for (let i = 0; i < getExistingBooks.length; i++) {
-			if (getExistingBooks[i].innerText === title) {
-				warningDialog.showModal()				
-				return;
-			}
-		}
-
-	const author = document.querySelector('#input-author').value;
-	const pages = document.querySelector('#input-pages').value;
-	let readIt = document.querySelector('#input-read-it');
-	let status;
-	readIt.value === 'true' ? status = true : false;
-
-	// Generate a new Book by using the processed data
-	newBook = new Book(title, author, pages, status);
-
-	// Display the new book using its 'sibling' prototype function //
-	newBook.stackTheBookDisplay();
-}
-
-// Prototype function of Book to display Book instances to page //
-Book.prototype.stackTheBookDisplay = function() {
-
-	// Create a div for THIS BOOK and be adopted by bookDisplay //
-	const thisBook = document.createElement('div');
-	thisBook.setAttribute("id", this.title.replace(/\s/g, ""));
-	bookDisplay.appendChild(thisBook);
-
-	// Add BOOK TITLE to page //
-	const bookTitle = document.createElement('p');
-	bookTitle.classList.add('book-title');
-	bookTitle.dataset.title = this.title;
-	bookTitle.innerText = this.title;
-	thisBook.appendChild(bookTitle);
-
-	// Add BOOK AUTHOR to page //
-	const bookAuthor = document.createElement('p');
-	bookAuthor.classList.add('book-author');
-	bookAuthor.dataset.author = this.author;
-	bookAuthor.innerText = 'by '+ this.author;
-	thisBook.appendChild(bookAuthor);
-
-	// Add BOOK PAGES to page //
-	const bookPages = document.createElement('p');
-	bookPages.classList.add('book-pages');
-	bookPages.dataset.pages = this.pages;
-	bookPages.innerText = this.pages + ' pages';
-	thisBook.appendChild(bookPages);
-
-	// Add BOOK READING STATUS to page //
-	const bookReadingStatus = document.createElement('p');
-	bookReadingStatus.classList.add('book-status');
-	bookReadingStatus.innerText = this.status === true ? "COMPLETED" : "IN PROGRESS";
-	bookReadingStatus.dataset.status = this.status === true ? "YES" : "NO";
-	thisBook.appendChild(bookReadingStatus);
-
-	// Add a button to change STATUS //
-	const statusButton = document.createElement('button');
-	statusButton.classList.add('status-button');
-	statusButton.setAttribute('id', this.title.replace(/\s/g, "-") + '-status-button')
-	statusButton.innerText = 'CHANGE STATUS';
-	thisBook.appendChild(statusButton);
-	statusButton.addEventListener('click', () => {
-		this.changeReadingStatus();
-	});
-
-	// Add a button to remove BOOK //
-	const removeButton = document.createElement('button');
-	removeButton.classList.add('remove-button', 'button');
-	removeButton.innerText = 'REMOVE';
-	thisBook.appendChild(removeButton);
-	removeButton.addEventListener('click', () => {
-		thisBook.remove();
-	});
-};
 
 // INPUT DIALOG //
 const form = document.querySelector('form');
