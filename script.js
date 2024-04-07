@@ -193,8 +193,6 @@ warningDialogButton.addEventListener('click', (e) => {
 
 // Form validation (Constraint Validation API)
 
-// Live validate
-
 // Validate book title
 function validateTitle() {
 	if (title.validity.valid) {
@@ -259,9 +257,7 @@ function showPagesError() {
 		pagesError.textContent = `Book pages should be at least ${pages.minLength} pages.`
 	}
 	pagesError.className = 'error active'
-	console.log(pages.validity)
 }
 
-// On submit
 
 
