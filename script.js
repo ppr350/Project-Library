@@ -1,4 +1,10 @@
 const bookDisplay = document.getElementById("book-display");
+const title = document.querySelector('#input-title')
+const author = document.querySelector('#input-author')
+const pages = document.querySelector('#input-pages')
+const titleError = document.querySelector('#input-title + span.error')
+const authorError = document.querySelector('#input-author + span.error')
+const pagesError = document.querySelector('#input-pages + span.error')
 
 // A collection of Mixins to later be assigned to class Book //
 let prototypeMixin = {
@@ -139,14 +145,33 @@ showDialog.addEventListener('click', () => {
 	addBookDialog.showModal();
 });
 
+title.addEventListener('input', () => {
+	validateTitle()
+})
+
+author.addEventListener('input', () => {
+	validateAuthor()
+})
+
+pages.addEventListener('input', () => {
+	validatePages()
+})
+
 // Add functionality to INPUT DIALOG //
 form.addEventListener('submit', (e) => {
 	// Prevent the default behavior of submitting form //
-	e.preventDefault();
+	
+	if (!title.validity.valid) {
+		showTitleError()
+		e.preventDefault();
+	}
 	// Call this prototype function to get newly inputted book info by user pass the info to become an instance of Book //
-	Book.prototype.add();
-	// Call this prototype function to add the Book instance to the display //
-	addBookDialog.close();
+	
+	else {
+		Book.prototype.add();
+		// Call this prototype function to add the Book instance to the display //
+		addBookDialog.close();
+	}
 });
 
 // Add a button to close and cancel INPUT DIALOG //
@@ -165,6 +190,74 @@ warningDialogButton.addEventListener('click', (e) => {
 	warningDialog.close();
 	addBookDialog.showModal();
 })
+
+// Form validation (Constraint Validation API)
+
+// Validate book title
+function validateTitle() {
+	if (title.validity.valid) {
+		titleError.textContent = ''
+		titleError.className = 'error'
+	} else {
+		showTitleError()
+	}
+}
+
+// Validate author name
+function validateAuthor() {
+	if (author.validity.valid) {
+		authorError.textContent = ''
+		authorError.className = 'error'
+	} else {
+		showAuthorError()
+	}
+}
+
+// validate page number
+function validatePages() {
+	if (pages.validity.valid) {
+		pagesError.textContent = ''
+		pagesError.className = 'error'
+	} else {
+		showPagesError()
+	}
+}
+
+// Error Messages
+function showTitleError() {
+	if (title.validity.valueMissing) {
+		titleError.textContent = 'You need to enter a book title.'
+	} else if (title.validity.tooShort) {
+		titleError.textContent = `Book title should be at least ${title.minLength} characters long.`
+	} else if (title.validity.tooLong) {
+		titleError.textContent = `Book title should be no more than ${title.maxLength} characters long.`
+	}
+	titleError.className = 'error active'
+}
+
+function showAuthorError() {
+	if (author.validity.valueMissing) {
+		authorError.textContent = 'You need to enter a author name.'
+	} else if (author.validity.tooShort) {
+		authorError.textContent = `Book author should be at least ${author.minLength} characters long.`
+	} else if (author.validity.tooLong) {
+		authorError.textContent = `Book author should be no more than ${author.maxLength} characters long.`
+	}
+	authorError.className = 'error active'
+}
+
+function showPagesError() {
+	if (pages.validity.tooShort || pages.validity.rangeUnderflow) {
+		pagesError.textContent = `Book pages should be at least ${pages.minLength} pages.`
+	} else if (pages.validity.tooLong || pages.validity.rangeOverflow) {
+		pagesError.textContent = `Book pages should be no more than ${pages.maxLength} pages.`
+	} else if (pages.validity.patternMismatch) {
+		pagesError.textContent = `Book pages should be no more than ${pages.maxLength} pages, and please only use numeric,.`
+	} else if (pages.validity.valueMissing) {
+		pagesError.textContent = `Book pages should be at least ${pages.minLength} pages.`
+	}
+	pagesError.className = 'error active'
+}
 
 
 

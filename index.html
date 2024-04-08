@@ -34,7 +34,7 @@
         <div id="dialog-container">
 
             <dialog id="add-book-dialog" class="dialog">
-                <form action="" method="dialog" id="form" name="add-book">
+                <form novalidate action="" method="dialog" id="form" name="add-book">
                     <fieldset>
                         <p>WHAT BOOK WOULD YOU LIKE TO ADD?</p>
                         <p class="input-title-section">
@@ -45,8 +45,10 @@
                                 data-input="title"
                                 name="input-title"
                                 placeholder="BOOK TITLE"
-                                minlength="1"
-                                maxlength="40" required>
+                                required
+                                minlength="3"
+                                maxlength="40">
+                            <span class="error" aria-live="polite"></span>
                         </p>
                         <p class="input-author-section">
                             <label for="input-author">AUTHOR:</label>
@@ -56,20 +58,27 @@
                                 data-input="author"
                                 name="input-author"
                                 placeholder="AUTHOR"
-                                minlength="1"
-                                maxlength="20" required>
+                                required
+                                minlength="3"
+                                maxlength="20">
+                            <span class="error" aria-live="polite"></span>
                         </p>
                         <p class="input-pages-section">
                             <label for="input-pages">TOTAL PAGES:</label>
                             <input 
-                                type="number"
+                                type="text"
+                                inputmode="numeric"
+                                pattern="\d{1,4}"
                                 id="input-pages"
                                 data-input="pages"
                                 name="input-pages"
                                 placeholder="TOTAL PAGES"
+                                required
                                 min="1"
+                                max="5000"
                                 minlength="1"
-                                maxlength="5000">
+                                maxlength="5000" value="1">
+                            <span class="error" aria-live="polite"></span>
                         </p>
                         <p class="input-read-it-section">
                             <label for="input-read-it">HAVE YOU READ IT?</label>

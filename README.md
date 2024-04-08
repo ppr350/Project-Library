@@ -1,4 +1,4 @@
-# Project: Library
+# Project: Library (#update 6th April 2024)
 
 ## This project is part of The Odin Project's Full Stack JavaScript Course.
 
@@ -26,6 +26,9 @@ The form is made to enable user to enter their book information and therefore ha
 
 The form can be dismissed by click the "CANCEL" button or pressing the "esc" key on keyboard. When the "ADD" button is pressed, JavaScript will it takeover.
 
+##### update 6th April 2024
+Added JavaScript Constraint Validity API to the project. It checks validation as the user progresses through the form, when a user leaves a form field, and when user submits the form.
+
 ### CSS
 
 As mentioned above, I want to make this site as accessible as possible, so I made efforts to make it fully responsive to all screen sizes. I opted for simpler layout for this project as the main focus is JavaScript. CSS GRID is the main backbone for the CSS file. The main container of the HTML file has is the parent of the grid-template-area. 
@@ -34,7 +37,7 @@ font-sizes are all controlled by the clamp() function. books are displayed in "c
 
 ### JavaScript
 
-This project uses Constructor function to generate new book. The Book constructor takes four arguments - title, author, pages and status. It also has a method called "description".
+This project uses class to generate new book. The Book class takes four arguments - title, author, pages and status. It also has a method called "description".
 
 I wrote three prototypes for this Book constuctor. The first one is "changeReadingStatus", as the name impplied, it changes the reading status. If the current status is "Work in Progress", calling this prototype fucntion changes the status to "Completed", or vice versa. When a book is added, a button called "CHANGE STATUS" will be generated to enable this functionality.
 
@@ -56,3 +59,5 @@ The "stackTheBookDisplay" prototype function roles is to process the book data a
 [MDN Web Docs for providing detailed guides](https://developer.mozilla.org/en-US/)
 
 [Stack Overflow](https://stackoverflow.com/)
+
+Discord users Mao && Don't rush learning! on TOP's Javascript-help-1
